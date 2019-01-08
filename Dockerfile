@@ -4,5 +4,6 @@ RUN apk add --no-cache git \
     && git clone https://github.com/Bevisy/webapp.git \
     && cd webapp \
     && go build webapp.go \
+    && chmod +x webapp \
     && mv webapp /
 ENTRYPOINT ["/webapp"]
