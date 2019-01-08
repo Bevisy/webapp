@@ -1,6 +1,6 @@
 .git/
 .gitignore
-.idea/
+.idea/*
 LICENSE
 README.md
 webapp.go
