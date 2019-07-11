@@ -1,27 +1,19 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	"os"
-	"syscall"
+    "io"
+    "log"
+    "net/http"
 )
 
-func echobot(w http.ResponseWriter, req *http.Request) {
-	//fmt.Fprintf(w, req.URL.Path+"\n")
-	_, err := w.Write([]byte(req.URL.Path))
-	if err != nil {
-		log.Fatalln("REPONSE FAILED!\n")
-	}
-	log.Fatalln("REQUEST URL: ", req.URL.Path)
+func hello(w http.ResponseWriter, r *http.Request) {
+    io.WriteString(w, "Hello, world!")
 }
 
 func main() {
-	log.SetFlags(syscall.Stdin)
-	http.HandleFunc("/", echobot)
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatalln("SERVER FAILED!\n")
-		os.Exit(-1)
-	}
+    http.HandleFunc("/hello", hello)
+    err := http.ListenAndServe(":80", nil) //设置监听的端口
+    if err != nil {
+        log.Fatal("ListenAndServe: ", err.Error())
+    }
 }
