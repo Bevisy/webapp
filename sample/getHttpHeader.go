@@ -31,11 +31,18 @@ func header(resp http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func statusCode(w http.ResponseWriter, req *http.Request) {
+	//w.WriteHeader(http.StatusInternalServerError)
+	w.WriteHeader(http.StatusBadGateway)
+	w.Write([]byte("haha"))
+}
+
 func main() {
 	server := http.Server{
-		Addr: "127.0.0.1:8080",
+		Addr: "0.0.0.0:8080",
 	}
 	http.HandleFunc("/header", header)
+	http.HandleFunc("/status", statusCode)
 	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
