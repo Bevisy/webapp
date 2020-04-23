@@ -3,12 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	messages := make(chan string, 2)
+	msgs := make(chan string, 2)
 
-	messages <- "buffered"
-	messages <- "channel"
+	msgs <- "buffered"
+	msgs <- "channel"
 
-	fmt.Println(<-messages)
-	fmt.Println(<-messages)
-	//fmt.Println(<- messages)
+	fmt.Println(<-msgs)
+	fmt.Println(<-msgs)
+	//fmt.Println(<- msgs)
 }
