@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/akyoto/cache v1.0.6
+	github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6
 	github.com/gin-gonic/autotls v0.0.0-20200314141124-cc69476aef2a
 	github.com/gin-gonic/gin v1.6.2
 	github.com/go-playground/validator/v10 v10.2.0
