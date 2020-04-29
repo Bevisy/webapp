@@ -40,5 +40,5 @@ func main() {
 
 	//默认监听 ":8080"
 	//router.Run()
-	router.Run("127.0.0.1:8080")
+	router.Run("10.125.104.90:8080")
 }
