@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+//变参函数
 func Sum(nums ...int) int {
 	var sum int = 0
 	for _, num := range nums {
