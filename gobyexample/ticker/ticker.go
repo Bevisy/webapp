@@ -14,7 +14,7 @@ func main() {
 			select {
 			case <-done:
 				return
-			case t := <-ticker.C:
+			case t := <-ticker.C: //读取通道，如果通道无值，则等待
 				fmt.Println("Tick at", t)
 			}
 		}
