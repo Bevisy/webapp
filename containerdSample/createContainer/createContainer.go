@@ -1,21 +1,28 @@
 package main
 
 import (
+	"context"
 	"github.com/containerd/containerd"
+	"github.com/containerd/containerd/namespaces"
 	"log"
 )
 
-func redisExample() error {
-	client, err := containerd.New("/run/containerd/containerd.sock")
-	if err != nil {
-		return err
-	}
+//func listImages(client *containerd.Client) error{
+//	client.Containers()
+//}
 
-	defer client.Close()
-	return nil
-}
 func main() {
-	if err := redisExample(); err != nil {
+	path := "/run/containerd/containerd.sock"
+	client, err := containerd.New(path)
+	defer client.Close()
+	if err != nil {
 		log.Fatal(err)
 	}
+	ctx := namespaces.WithNamespace(context.Background(), "example")
+	redisImage := "docker.io/library/redis:alpine"
+	image, err := client.Pull(ctx, redisImage, containerd.WithPullUnpack)
+	if err != nil {
+		panic(err)
+	}
+	log.Printf("Successfully pulled %s image\n", image.Name())
 }
