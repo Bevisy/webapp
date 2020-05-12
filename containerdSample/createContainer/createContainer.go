@@ -32,6 +32,7 @@ func main() {
 	//image.Name() 示例：docker.io/library/busybox:latest
 	log.Printf("Successfully pulled %s image\n", image.Name())
 
+	//创建容器
 	container, err := client.NewContainer(ctx, "redis-server",
 		containerd.WithNewSnapshot("redis-server-snapshot", image),
 		containerd.WithNewSpec(oci.WithImageConfig(image)),
@@ -40,5 +41,6 @@ func main() {
 		panic(err)
 	}
 	log.Printf("container %s create succeess.", container.ID())
+	//创建成功后即删除
 	defer container.Delete(ctx, containerd.WithSnapshotCleanup)
 }
