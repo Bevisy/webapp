@@ -34,7 +34,8 @@ func redisExample() error {
 	container, err := client.NewContainer(ctx, "redis-server",
 		containerd.WithNewSnapshot("redis-server-snapshot", image),
 		containerd.WithNewSpec(oci.WithImageConfig(image)),
-		containerd.WithRuntime("io.containerd.runtime.v1.linux", nil))
+		containerd.WithRuntime("io.containerd.runtime.v1.linux",
+			nil)) //修改runtime版本
 	if err != nil {
 		return err
 	}
