@@ -33,7 +33,8 @@ func redisExample() error {
 	//create a container
 	container, err := client.NewContainer(ctx, "redis-server",
 		containerd.WithNewSnapshot("redis-server-snapshot", image),
-		containerd.WithNewSpec(oci.WithImageConfig(image)))
+		containerd.WithNewSpec(oci.WithImageConfig(image)),
+		containerd.WithRuntime("io.containerd.runtime.v1.linux", nil))
 	if err != nil {
 		return err
 	}
