@@ -1,11 +1,21 @@
 package main
 
-func main() {
-	//slice 为 nil 和 slice 为 空 是两种情况
-	//var slice []int // nil slice
-	// slice[0] = 1 //提示数组越界
+import (
+	"fmt"
+	"sync"
+)
 
-	//slice 为 空
-	//slice1 := make([]int, 0)
-	//slice2 := []int{}
+func main() {
+	var wg sync.WaitGroup //创建 WaitGroup
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1) //每启动一个新的goroutine，计数加1
+		go func(i int) {
+			fmt.Printf("start task %d\n", i)
+			defer wg.Done() //goroutine退出，则减一
+		}(i)
+	}
+	wg.Wait()
+
+	fmt.Println("Finished.")
 }
