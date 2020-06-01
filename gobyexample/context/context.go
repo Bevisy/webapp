@@ -17,8 +17,9 @@ func hello(w http.ResponseWriter, req *http.Request) {
 	log.Println("server: hello handler started.")
 	defer log.Println("server: hello handler ended.")
 
+	stop := time.NewTimer(10 * time.Second)
 	select {
-	case <-time.After(10 * time.Second):
+	case <-stop.C:
 		fmt.Fprintf(w, "hello\n")
 	case <-ctx.Done():
 
